@@ -1,0 +1,151 @@
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.22 (Ubuntu 12.22-0ubuntu0.20.04.4))
+Type "help" for help.
+postgres=> -- Create database
+postgres=> CREATE DATABASE universe;
+CREATE DATABASE
+postgres=> 
+postgres=> -- Connect to database
+postgres=> \c universe
+You are now connected to database "universe" as user "freecodecamp".
+universe=> 
+universe=> -- GALAXY
+universe=> CREATE TABLE galaxy (
+universe(>   galaxy_id SERIAL PRIMARY KEY,
+universe(>   name VARCHAR(100) UNIQUE NOT NULL,
+universe(>   description TEXT NOT NULL,
+universe(>   age_in_millions_of_years INT NOT NULL,
+universe(>   distance_from_earth NUMERIC,
+universe(>   has_life BOOLEAN NOT NULL
+universe(> );
+CREATE TABLE
+universe=> 
+universe=> -- STAR
+universe=> CREATE TABLE star (
+universe(>   star_id SERIAL PRIMARY KEY,
+universe(>   name VARCHAR(100) UNIQUE NOT NULL,
+universe(>   galaxy_id INT NOT NULL REFERENCES galaxy(galaxy_id),
+universe(>   age_in_millions_of_years INT NOT NULL,
+universe(>   is_spherical BOOLEAN NOT NULL,
+universe(>   mass NUMERIC
+universe(> );
+CREATE TABLE
+universe=> 
+universe=> -- PLANET
+universe=> CREATE TABLE planet (
+universe(>   planet_id SERIAL PRIMARY KEY,
+universe(>   name VARCHAR(100) UNIQUE NOT NULL,
+universe(>   star_id INT NOT NULL REFERENCES star(star_id),
+universe(>   age_in_millions_of_years INT NOT NULL,
+universe(>   has_life BOOLEAN NOT NULL,
+universe(>   planet_type TEXT
+universe(> );
+CREATE TABLE
+universe=> 
+universe=> -- MOON
+universe=> CREATE TABLE moon (
+universe(>   moon_id SERIAL PRIMARY KEY,
+universe(>   name VARCHAR(100) UNIQUE NOT NULL,
+universe(>   planet_id INT NOT NULL REFERENCES planet(planet_id),
+universe(>   is_spherical BOOLEAN NOT NULL,
+universe(>   age_in_millions_of_years INT,
+universe(>   distance_from_planet NUMERIC
+universe(> );
+CREATE TABLE
+universe=> 
+universe=> -- FIFTH TABLE
+universe=> CREATE TABLE galaxy_type (
+universe(>   galaxy_type_id SERIAL PRIMARY KEY,
+universe(>   name VARCHAR(100) UNIQUE NOT NULL,
+universe(>   description TEXT NOT NULL
+universe(> );
+CREATE TABLE
+universe=> 
+universe=> -- GALAXY DATA (6)
+universe=> INSERT INTO galaxy(name, description, age_in_millions_of_years, distance_from_earth, has_life) VALUES
+universe-> ('Milky Way','Home galaxy',13600,0,TRUE),
+universe-> ('Andromeda','Nearest large galaxy',10000,2537000,FALSE),
+universe-> ('Triangulum','Spiral galaxy',12000,3000000,FALSE),
+universe-> ('Whirlpool','Spiral galaxy',11000,23000000,FALSE),
+universe-> ('Sombrero','Bright galaxy',13000,29000000,FALSE),
+universe-> ('Pinwheel','Large spiral',9000,21000000,FALSE);
+INSERT 0 6
+universe=> 
+universe=> -- STAR DATA (6)
+universe=> INSERT INTO star(name, galaxy_id, age_in_millions_of_years, is_spherical, mass) VALUES
+universe-> ('Sun',1,4600,TRUE,1.0),
+universe-> ('Sirius',1,300,TRUE,2.1),
+universe-> ('Alpha Andromedae',2,1000,TRUE,3.5),
+universe-> ('Tri Star',3,2000,TRUE,1.8),
+universe-> ('Whirlpool Star',4,1500,TRUE,2.5),
+universe-> ('Pinwheel Star',6,2500,TRUE,1.9);
+INSERT 0 6
+universe=> 
+universe=> -- PLANET DATA (12)
+universe=> INSERT INTO planet(name, star_id, age_in_millions_of_years, has_life, planet_type) VALUES
+universe-> ('Mercury',1,4500,FALSE,'Rocky'),
+universe-> ('Venus',1,4500,FALSE,'Rocky'),
+universe-> ('Earth',1,4500,TRUE,'Rocky'),
+universe-> ('Mars',1,4500,FALSE,'Rocky'),
+universe-> ('Jupiter',1,4500,FALSE,'Gas Giant'),
+universe-> ('Saturn',1,4500,FALSE,'Gas Giant'),
+universe-> ('Planet7',2,1000,FALSE,'Ice'),
+universe-> ('Planet8',2,900,FALSE,'Rocky'),
+universe-> ('Planet9',3,1100,FALSE,'Rocky'),
+universe-> ('Planet10',4,1300,FALSE,'Gas'),
+universe-> ('Planet11',5,1400,FALSE,'Rocky'),
+universe-> ('Planet12',6,1500,FALSE,'Ice');
+INSERT 0 12
+universe=> 
+universe=> -- MOON DATA (20)
+universe=> INSERT INTO moon(name, planet_id, is_spherical, age_in_millions_of_years, distance_from_planet) VALUES
+universe-> ('Moon1',1,TRUE,100,1000),
+universe-> ('Moon2',2,TRUE,100,1000),
+universe-> ('Moon3',3,TRUE,100,1000),
+universe-> ('Moon4',4,TRUE,100,1000),
+universe-> ('Moon5',5,TRUE,100,1000),
+universe-> ('Moon6',6,TRUE,100,1000),
+universe-> ('Moon7',7,TRUE,100,1000),
+universe-> ('Moon8',8,TRUE,100,1000),
+universe-> ('Moon9',9,TRUE,100,1000),
+universe-> ('Moon10',10,TRUE,100,1000),
+universe-> ('Moon11',11,TRUE,100,1000),
+universe-> ('Moon12',12,TRUE,100,1000),
+universe-> ('Moon13',1,TRUE,100,1000),
+universe-> ('Moon14',2,TRUE,100,1000),
+universe-> ('Moon15',3,TRUE,100,1000),
+universe-> ('Moon16',4,TRUE,100,1000),
+universe-> ('Moon17',5,TRUE,100,1000),
+universe-> ('Moon18',6,TRUE,100,1000),
+universe-> ('Moon19',7,TRUE,100,1000),
+universe-> ('Moon20',8,TRUE,100,1000);
+INSERT 0 20
+universe=> 
+universe=> -- GALAXY TYPE DATA (3)
+universe=> INSERT INTO galaxy_type(name, description) VALUES
+universe-> ('Spiral','Spiral shaped galaxy'),
+universe-> ('Elliptical','Elliptical galaxy'),
+universe-> ('Irregular','Irregular galaxy');
+INSERT 0 3
+universe=> \d
+                          List of relations
++--------+--------------------------------+----------+--------------+
+| Schema |              Name              |   Type   |    Owner     |
++--------+--------------------------------+----------+--------------+
+| public | galaxy                         | table    | freecodecamp |
+| public | galaxy_galaxy_id_seq           | sequence | freecodecamp |
+| public | galaxy_type                    | table    | freecodecamp |
+| public | galaxy_type_galaxy_type_id_seq | sequence | freecodecamp |
+| public | moon                           | table    | freecodecamp |
+| public | moon_moon_id_seq               | sequence | freecodecamp |
+| public | planet                         | table    | freecodecamp |
+| public | planet_planet_id_seq           | sequence | freecodecamp |
+| public | star                           | table    | freecodecamp |
+| public | star_star_id_seq               | sequence | freecodecamp |
++--------+--------------------------------+----------+--------------+
+(10 rows)
+
+universe=> pg_dump -cC --inserts -U freecodecamp universe > universe.sql
+
