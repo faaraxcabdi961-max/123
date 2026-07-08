@@ -1,0 +1,38 @@
+camper@codespaces-de684a:/workspace/project$ psql --username=freecodecamp --dbname=postgres
+psql (12.22 (Ubuntu 12.22-0ubuntu0.20.04.4))
+Type "help" for help.
+
+postgres=> CREATE DATABASE salon;
+CREATE DATABASE
+postgres=> \c salon
+You are now connected to database "salon" as user "freecodecamp".
+salon=> 
+salon=> CREATE TABLE customers(
+salon(>   customer_id SERIAL PRIMARY KEY,
+salon(>   phone VARCHAR UNIQUE NOT NULL,
+salon(>   name VARCHAR NOT NULL
+salon(> );
+CREATE TABLE
+salon=> 
+salon=> CREATE TABLE services(
+salon(>   service_id SERIAL PRIMARY KEY,
+salon(>   name VARCHAR NOT NULL
+salon(> );
+CREATE TABLE
+salon=> 
+salon=> CREATE TABLE appointments(
+salon(>   appointment_id SERIAL PRIMARY KEY,
+salon(>   customer_id INT REFERENCES customers(customer_id),
+salon(>   service_id INT REFERENCES services(service_id),
+salon(>   time VARCHAR NOT NULL
+salon(> );
+CREATE TABLE
+salon=> 
+salon=> INSERT INTO services(name) VALUES('cut');
+INSERT 0 1
+salon=> INSERT INTO services(name) VALUES('color');
+INSERT 0 1
+salon=> INSERT INTO services(name) VALUES('perm');
+INSERT 0 1
+salon=> \q
+camper@codespaces-de684a:/workspace/project$ 
