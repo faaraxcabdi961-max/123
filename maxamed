@@ -1,0 +1,142 @@
+camper@codespaces-c3855e:/workspace/project$ psql --username=freecodecamp --dbname=periodic_table
+psql (12.22 (Ubuntu 12.22-0ubuntu0.20.04.4))
+Type "help" for help.
+
+periodic_table=> -- Rename columns
+periodic_table=> ALTER TABLE properties RENAME COLUMN weight TO atomic_mass;
+ALTER TABLE
+periodic_table=> ALTER TABLE properties RENAME COLUMN melting_point TO melting_point_celsius;
+ALTER TABLE
+periodic_table=> ALTER TABLE properties RENAME COLUMN boiling_point TO boiling_point_celsius;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- NOT NULL constraints
+periodic_table=> ALTER TABLE properties
+periodic_table-> ALTER COLUMN melting_point_celsius SET NOT NULL;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> ALTER TABLE properties
+periodic_table-> ALTER COLUMN boiling_point_celsius SET NOT NULL;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- UNIQUE constraints
+periodic_table=> ALTER TABLE elements
+periodic_table-> ADD CONSTRAINT unique_symbol UNIQUE(symbol);
+ALTER TABLE
+periodic_table=> 
+periodic_table=> ALTER TABLE elements
+periodic_table-> ADD CONSTRAINT unique_name UNIQUE(name);
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- NOT NULL constraints
+periodic_table=> ALTER TABLE elements
+periodic_table-> ALTER COLUMN symbol SET NOT NULL;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> ALTER TABLE elements
+periodic_table-> ALTER COLUMN name SET NOT NULL;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- Foreign key
+periodic_table=> ALTER TABLE properties
+periodic_table-> ADD CONSTRAINT fk_atomic_number
+periodic_table-> FOREIGN KEY (atomic_number)
+periodic_table-> REFERENCES elements(atomic_number);
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- Create types table
+periodic_table=> CREATE TABLE types(
+periodic_table(>   type_id SERIAL PRIMARY KEY,
+periodic_table(>   type VARCHAR NOT NULL
+periodic_table(> );
+CREATE TABLE
+periodic_table=> 
+periodic_table=> -- Insert types
+periodic_table=> INSERT INTO types(type)
+periodic_table-> VALUES
+periodic_table-> ('nonmetal'),
+periodic_table-> ('metal'),
+periodic_table-> ('metalloid');
+INSERT 0 3
+periodic_table=> 
+periodic_table=> -- Add type_id
+periodic_table=> ALTER TABLE properties
+periodic_table-> ADD COLUMN type_id INT;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> UPDATE properties
+periodic_table-> SET type_id = (
+periodic_table(>   SELECT type_id
+periodic_table(>   FROM types
+periodic_table(>   WHERE types.type = properties.type
+periodic_table(> );
+UPDATE 9
+periodic_table=> 
+periodic_table=> ALTER TABLE properties
+periodic_table-> ALTER COLUMN type_id SET NOT NULL;
+ALTER TABLE
+periodic_table=> 
+periodic_table=> ALTER TABLE properties
+periodic_table-> ADD CONSTRAINT fk_type
+periodic_table-> FOREIGN KEY(type_id)
+periodic_table-> REFERENCES types(type_id);
+ALTER TABLE
+periodic_table=> 
+periodic_table=> -- Remove old column
+periodic_table=> ALTER TABLE properties
+periodic_table-> DROP COLUMN type;
+ALTER TABLE
+periodic_table=> UPDATE elements
+periodic_table-> SET symbol = INITCAP(symbol);
+UPDATE 9
+periodic_table=> ALTER TABLE properties
+periodic_table-> ALTER COLUMN atomic_mass TYPE DECIMAL;
+ALTER TABLE
+periodic_table=> UPDATE properties SET atomic_mass=1.008 WHERE atomic_number=1;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=4.0026 WHERE atomic_number=2;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=6.94 WHERE atomic_number=3;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=9.0122 WHERE atomic_number=4;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=10.81 WHERE atomic_number=5;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=12.011 WHERE atomic_number=6;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=14.007 WHERE atomic_number=7;
+UPDATE 1
+periodic_table=> UPDATE properties SET atomic_mass=15.999 WHERE atomic_number=8;
+UPDATE 1
+periodic_table=> INSERT INTO elements
+periodic_table-> VALUES(9,'F','Fluorine');
+INSERT 0 1
+periodic_table=> 
+periodic_table=> INSERT INTO properties
+periodic_table-> VALUES(
+periodic_table(> 9,
+periodic_table(> 18.998,
+periodic_table(> -220,
+periodic_table(> -188.1,
+periodic_table(> (SELECT type_id FROM types WHERE type='nonmetal')
+periodic_table(> );
+INSERT 0 1
+periodic_table=> INSERT INTO elements
+periodic_table-> VALUES(10,'Ne','Neon');
+INSERT 0 1
+periodic_table=> 
+periodic_table=> INSERT INTO properties
+periodic_table-> VALUES(
+periodic_table(> 10,
+periodic_table(> 20.18,
+periodic_table(> -248.6,
+periodic_table(> -246.1,
+periodic_table(> (SELECT type_id FROM types WHERE type='nonmetal')
+periodic_table(> );
+INSERT 0 1
+periodic_table=> DELETE FROM properties WHERE atomic_number=1000;
+DELETE 1
+periodic_table=> DELETE FROM elements WHERE atomic_number=1000;
+DELETE 1
+periodic_table=> \q
+camper@codespaces-c3855e:/workspace/project$ 
