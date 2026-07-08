@@ -1,0 +1,499 @@
+camper: /project$ psql --username=freecodecamp --dbname=postgres 
+psql (12.22 (Ubuntu 12.22-0ubuntu0.20.04.4))
+Type "help" for help.
+
+postgres=> CREATE DATABASE number_guess;
+ERROR:  database "number_guess" already exists
+postgres=> \c number_guess
+You are now connected to database "number_guess" as user "freecodecamp".
+number_guess=> CREATE TABLE users (
+number_guess(>   user_id SERIAL PRIMARY KEY,
+number_guess(>   username VARCHAR(22) UNIQUE NOT NULL,
+number_guess(>   games_played INT DEFAULT 0,
+number_guess(>   best_game INT
+number_guess(> );
+ERROR:  relation "users" already exists
+number_guess=> camper: /project$ mkdir number_guessing_game
+mkdir: cannot create directory ‘number_guessing_game’: File exists
+camper: /project$ cd number_guessing_game
+camper: /number_guessing_game$ chmod +x number_guess.sh
+camper: /number_guessing_game$ ./number_guess.sh
+camper: /number_guessing_game$ git init
+Initialized empty Git repository in /workspace/project/number_guessing_game/.git/
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "Initial commit"
+[master (root-commit) a18f73f] Initial commit
+ 1 file changed, 61 insertions(+)
+ create mode 100755 number_guess.sh
+camper: /number_guessing_game$ git branch -M main
+camper: /number_guessing_game$ echo "# generates random number and takes guesses" >> number_guess.sh
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "feat: add core guessing game logic"
+[main bb785d1] feat: add core guessing game logic
+ 1 file changed, 1 insertion(+)
+camper: /number_guessing_game$ echo "# tracks games played and best game per user" >> number_guess.sh
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "feat: track user stats in database"
+[main 440170f] feat: track user stats in database
+ 1 file changed, 1 insertion(+)
+camper: /number_guessing_game$ echo "# validate integer input before comparing" >> number_guess.sh
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "fix: validate non-integer guesses"
+[main 851c9f9] fix: validate non-integer guesses
+ 1 file changed, 1 insertion(+)
+camper: /number_guessing_game$ pg_dump -cC --inserts -U freecodecamp number_guess > number_guess.sql
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "chore: add number_guess.sql dump file"
+[main 4b35717] chore: add number_guess.sql dump file
+ 1 file changed, 121 insertions(+)
+ create mode 100644 number_guess.sql
+camper: /number_guessing_game$ echo "# tested with new and returning users" >> number_guess.sh
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "test: verify username welcome messages"
+[main 0af3cd2] test: verify username welcome messages
+ 1 file changed, 1 insertion(+)
+camper: /number_guessing_game$ git log --oneline
+0af3cd2 (HEAD -> main) test: verify username welcome messages
+4b35717 chore: add number_guess.sql dump file
+851c9f9 fix: validate non-integer guesses
+440170f feat: track user stats
+...skipping...
+0af3cd2 (HEAD -> main) test: verify username welcome messages
+4b35717 chore: add number_guess.sql dump file
+851c9f9 fix: validate non-integer guesses
+440170f feat: track user stats
+No previous regular expression
+0af3cd2 (HEAD -> main) test: verify username welcome messages
+4b35717 chore: add number_guess.sql dump file
+851c9f9 fix: validate non-integer guesses
+440170f feat: track user stats
+Finishing logfile... (interrup
+...skipping...
+
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Warning: "tatus" exists; Overw
+Overwrite, Append, or Don't log? (Type "O", "A", "D" or "q")
+Overwrite, Append, or Don't log? (Type "O", "A", "D" or "q")
+Overwrite, Append, or Don't log? (Type "O", "A", "D" or "q")
+Overwrite, Append, or Don't log? (Type "O", "A", "D" or "q")
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ -----------------------------------------------------------
+----------------
+
+                           MOVING
+
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines).
+  y  ^Y  k  ^K  ^P  *  Backwar
+d one line   (or N lines).
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Log file is already in use  (p
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Log file is already in use  (p
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Log file is already in use  (p
+
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+No previous regular expression
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+No previous regular expression
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+Log file is already in use  (p
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ -----------------------------------------------------------
+----------------
+
+                           MOVING
+
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines).
+  y  ^Y  k  ^K  ^P  *  Backwar
+d one line   (or N lines).
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+en.
+      A key preceded by a care
+t indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ -----------------------------------------------------------
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Log file is already in use  (p
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+Log file is already in use  (p
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+en.
+      A key preceded by a care
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is givt indicates the Ctrl key; thus
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+en.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+en.
+      A key preceded by a care
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is givt indicates the Ctrl key; thus
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+en.
+      A key preceded by a care
+t indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ -----------------------------------------------------------
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * m
+ay be preceded by a number, N.
+      Notes in parentheses ind
+icate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+                   SUMMARY OF 
+LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+...skipping...
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+No previous regular expression
+
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is giv
+log file: tatus
+
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a numb, or q when donecamper: /number_guessing_game$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tatus
+
+nothing added to commit but untracked files present (use "git add" to track)
+camper: /number_guessing_game$ git add .
+camper: /number_guessing_game$ git commit -m "Your descriptive commit message"
+[main 6c4164a] Your descriptive commit message
+ 1 file changed, 21 insertions(+)
+ create mode 100644 tatus
+camper: /number_guessing_game$ git stash
+No local changes to save
+camper: /number_guessing_game$ git reset --hard HEAD
+HEAD is now at 6c4164a Your descriptive commit message
+camper: /number_guessing_game$ git clean -fd
+camper: /number_guessing_game$ git checkout main
+Already on 'main'
+camper: /number_guessing_game$ git pull origin maingit commit -m "fix: correct SQL query"
+error: unknown switch `m'
+usage: git pull [<options>] [<repository> [<refspec>...]]
+
+    -v, --verbose         be more verbose
+    -q, --quiet           be more quiet
+    --progress            force progress reporting
+    --recurse-submodules[=<on-demand>]
+                          control for recursive fetching of submodules
+
+Options related to merging
+    -r, --rebase[=(false|true|merges|preserve|interactive)]
+                          incorporate changes by rebasing rather than merging
+    -n                    do not show a diffstat at the end of the merge
+    --stat                show a diffstat at the end of the merge
+    --log[=<n>]           add (at most <n>) entries from shortlog to merge commit message
+    --signoff[=...]       add Signed-off-by:
+    --squash              create a single commit instead of doing a merge
+    --commit              perform a commit if the merge succeeds (default)
+    --edit                edit message before committing
+    --cleanup <mode>      how to strip spaces and #comments from message
+    --ff                  allow fast-forward
+    --ff-only             abort if fast-forward is not possible
+    --verify-signatures   verify that the named commit has a valid GPG signature
+    --autostash           automatically stash/stash pop before and after rebase
+    -s, --strategy <strategy>
+                          merge strategy to use
+    -X, --strategy-option <option=value>
+                          option for selected merge strategy
+    -S, --gpg-sign[=<key-id>]
+                          GPG sign commit
+    --allow-unrelated-histories
+                          allow merging unrelated histories
+
+Options related to fetching
+    --all                 fetch from all remotes
+    -a, --append          append to .git/FETCH_HEAD instead of overwriting
+    --upload-pack <path>  path to upload pack on remote end
+    -f, --force           force overwrite of local branch
+    -t, --tags            fetch all tags and associated objects
+    -p, --prune           prune remote-tracking branches no longer on remote
+    -j, --jobs[=<n>]      number of submodules pulled in parallel
+    --dry-run             dry run
+    -k, --keep            keep downloaded pack
+    --depth <depth>       deepen history of shallow clone
+    --unshallow           convert to a complete repository
+    --update-shallow      accept refs that update .git/shallow
+    --refmap <refmap>     specify fetch refmap
+    -4, --ipv4            use IPv4 addresses only
+    -6, --ipv6            use IPv6 addresses only
+    --show-forced-updates
+                          check for forced-updates on all updated branches
+    --set-upstream        set upstream for git pull/fetch
+
+camper: /number_guessing_game$ git commit -m "feat: add number guessing game"
+On branch main
+nothing to commit, working tree clean
+camper: /number_guessing_game$ git commit -m "refactor: simplify bash script"
+On branch main
+nothing to commit, working tree clean
+camper: /number_guessing_game$ git commit -m "chore: update database schema"
+On branch main
+nothing to commit, working tree clean
+camper: /number_guessing_game$ git commit -m "test: add unit tests for game logic"
+On branch main
+nothing to commit, working tree clean
+camper: /number_guessing_game$ git commit --amend -m "fix: correct SQL query"
+[main 5834048] fix: correct SQL query
+ Date: Wed Jul 8 10:38:15 2026 -0400
+ 1 file changed, 21 insertions(+)
+ create mode 100644 tatus
+camper: /number_guessing_game$ git log --oneline
+5834048 (HEAD -> m
+5834048 (HEAD -> main) fix: correct SQL query
+0af3cd2 test: verify username welcome messages
+4b35717 chore: add number_guess.sql 
+No next tag  (pres
+5834048 (HEAD -> main) fix: correct SQL query
+0af3cd2 test: verify username welcome messages
+4b35717 chore: add number_guess.sql 
+dump file
+851c9f9 fix: validate non-integer guesses
+440170f feat: track user stats in database
+bb785d1 feat: add 
+--old-bot
+dump file
+851c9f9 fix: validate non-integer guesses
+440170f feat: track user stats in database
+bb785d1 feat: add c:
